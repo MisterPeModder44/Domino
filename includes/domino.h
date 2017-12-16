@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   domino.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yguaye <yguaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 22:14:47 by yguaye            #+#    #+#             */
-/*   Updated: 2017/12/16 16:02:01 by yguaye           ###   ########.fr       */
+/*   Created: 2017/12/16 14:33:05 by yguaye            #+#    #+#             */
+/*   Updated: 2017/12/16 15:39:06 by yguaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_base/base.h"
+#ifndef DOMINO_H
+# define DOMINO_H
 
-void		ft_lstadd(t_list **alst, t_list *nlst)
+#include "libft.h"
+
+typedef struct		s_domino
 {
-	t_list	*tmp;
+	int				num1;
+	int				num2;
+}					t_domino;
 
-	if (!alst || !*alst)
-		*alst = nlst;
-	else
-	{
-		tmp = *alst;
-		*alst = nlst;
-		nlst->next = tmp;
-	}
-}
+t_list				*make_domino_pool(void);
+int					get_dnum_1(t_list *domino);
+int					get_dnum_2(t_list *domino);
+
+#endif

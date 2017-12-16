@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yguaye <yguaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 22:14:47 by yguaye            #+#    #+#             */
-/*   Updated: 2017/12/16 16:02:01 by yguaye           ###   ########.fr       */
+/*   Created: 2017/12/16 13:14:07 by yguaye            #+#    #+#             */
+/*   Updated: 2017/12/16 13:24:41 by yguaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_base/base.h"
+#include "libft.h"
 
-void		ft_lstadd(t_list **alst, t_list *nlst)
+int			ft_put_error(char *reason)
 {
-	t_list	*tmp;
-
-	if (!alst || !*alst)
-		*alst = nlst;
-	else
-	{
-		tmp = *alst;
-		*alst = nlst;
-		nlst->next = tmp;
-	}
+	ft_putstr_fd("\x1b[1;31merror:\x1b[0m ", 2);
+	ft_putendl(reason);
+	return (-1);
 }

@@ -9,7 +9,8 @@ BASE_LST_SRC_NAMES :=	ft_array_to_lst.c \
 						ft_lstadd.c \
 						ft_lstdelone.c \
 						ft_lstlen.c \
-						ft_lstnew.c
+						ft_lstnew.c \
+						ft_lstrem.c
 
 BASE_LST_OBJ_NAMES = $(BASE_LST_SRC_NAMES:.c=.o)
 

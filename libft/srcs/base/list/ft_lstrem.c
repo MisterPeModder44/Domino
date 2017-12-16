@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_lstrem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yguaye <yguaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 22:14:47 by yguaye            #+#    #+#             */
-/*   Updated: 2017/12/16 16:02:01 by yguaye           ###   ########.fr       */
+/*   Created: 2017/12/16 14:37:16 by yguaye            #+#    #+#             */
+/*   Updated: 2017/12/16 17:14:46 by yguaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_base/base.h"
 
-void		ft_lstadd(t_list **alst, t_list *nlst)
+void		ft_lstrem(t_list **beg, t_list *lst)
 {
-	t_list	*tmp;
+	t_list	*prev;
 
-	if (!alst || !*alst)
-		*alst = nlst;
+	if (!beg || !*beg || !lst)
+		return ;
+	if (lst == *beg)
+		*beg = (*beg)->next;
 	else
 	{
-		tmp = *alst;
-		*alst = nlst;
-		nlst->next = tmp;
+		prev = *beg;
+		while (prev->next)
+		{
+			if (prev->next == lst)
+			{
+				prev = prev->next->next;
+				lst->next = NULL;
+				return ;
+			}
+			else
+				prev = prev->next;
+		}
 	}
 }
