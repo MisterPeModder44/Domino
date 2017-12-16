@@ -27,6 +27,7 @@ MODULES =
 
 #include subdirs here
 -include srcs/base/base.mk
+-include srcs/gnl/gnl.mk
 
 LC = ar rcs
 CC = gcc
