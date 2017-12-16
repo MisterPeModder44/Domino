@@ -28,6 +28,7 @@ BASE_STR_SRC_NAMES :=	ft_atoi.c \
 						ft_strsplit.c \
 						ft_strstr.c \
 						ft_strsub.c \
+						ft_strtabdel.c \
 						ft_strtrim.c \
 						ft_strupcase.c
 

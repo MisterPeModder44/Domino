@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_strtabdel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yguaye <yguaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 22:14:47 by yguaye            #+#    #+#             */
-/*   Updated: 2017/12/16 16:02:01 by yguaye           ###   ########.fr       */
+/*   Created: 2017/12/16 13:59:54 by yguaye            #+#    #+#             */
+/*   Updated: 2017/12/16 16:32:51 by yguaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_base/base.h"
+#include <stdlib.h>
 
-void		ft_lstadd(t_list **alst, t_list *nlst)
+void		ft_strtabdel(char ***tab)
 {
-	t_list	*tmp;
+	char	**tmp;
 
-	if (!alst || !*alst)
-		*alst = nlst;
-	else
+	tmp = *tab;
+	while (*tmp)
 	{
-		tmp = *alst;
-		*alst = nlst;
-		nlst->next = tmp;
+		ft_strclr(*tmp);
+		free(*tmp);
+		++tmp;
 	}
+	ft_memdel((void **)tab);
 }

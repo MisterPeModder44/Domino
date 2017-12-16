@@ -4,7 +4,7 @@ SRC_PATH := srcs
 OBJ_PATH := bin
 INC_PATH := includes
 
-SRCS_NAMES = main.c
+SRCS_NAMES = main.c commands.c
 OBJS_NAMES = $(SRCS_NAMES:.c=.o)
 
 SRCS = $(addprefix $(SRC_PATH)/, $(SRCS_NAMES))
