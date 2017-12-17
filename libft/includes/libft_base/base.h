@@ -6,7 +6,7 @@
 /*   By: yguaye <yguaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 12:32:10 by yguaye            #+#    #+#             */
-/*   Updated: 2017/12/16 16:33:00 by yguaye           ###   ########.fr       */
+/*   Updated: 2017/12/17 13:54:47 by yguaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void				ft_lstadd(t_list **alst, t_list *nlst);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstrem(t_list **beg, t_list *lst);
+t_list				*ft_lstextract(t_list **lst, void *target,
+		int (*cmp)(void *, void *));
 
 char				*ft_strupcase(char *str);
 char				*ft_strlowcase(char *str);

@@ -4,7 +4,17 @@ SRC_PATH := srcs
 OBJ_PATH := bin
 INC_PATH := includes
 
-SRCS_NAMES = main.c commands.c
+SRCS_NAMES =	main.c		\
+				commands_1.c\
+				commands_2.c\
+				domino_1.c	\
+				domino_2.c	\
+				output_1.c	\
+				output_2.c	\
+				turn.c		\
+				place.c		\
+				tmp.c
+
 OBJS_NAMES = $(SRCS_NAMES:.c=.o)
 
 SRCS = $(addprefix $(SRC_PATH)/, $(SRCS_NAMES))

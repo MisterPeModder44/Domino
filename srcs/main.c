@@ -6,54 +6,54 @@
 /*   By: yguaye <yguaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 18:51:29 by yguaye            #+#    #+#             */
-/*   Updated: 2017/12/16 20:00:10 by yguaye           ###   ########.fr       */
+/*   Updated: 2017/12/17 17:10:21 by yguaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include "libft.h"
-#include "domino_exp.h"
+#include "libft_base/base.h"
+#include "get_next_line.h"
+#include "domino.h"
+#include "tmp.h"
 
 #define SPLIT_CHAR ':'
 
-static void		get_logfile(void)
-{
-	char	*str;
-	char	*tmp;
-	int		ret;
-	int		att;
-
-	ret = 1;
-	att = 1;
-	while (ret)
-	{
-		tmp = ft_itoa(att);
-		str = ft_strjoin("log_", tmp);
-		free(tmp);
-		tmp = ft_strjoin(str, ".txt");
-		free(str);
-		ret = open(tmp, O_CREAT | O_WRONLY | O_EXCL, 0640);
-		free(tmp);
-		++att;
-		if (ret > 0)
-			break;
-	}
-	g_lfd = ret;
-	dprintf(g_lfd, "== LOGFILE %d ==\n", att - 1);
-}
-
-static int		proc_cmd(t_gamestate *state,char **cmd)
+static int		proc_cmd(t_gamestate **state,char **cmd)
 {
 
 	if (ft_strequ(*cmd, "player") && *(cmd[1]) == 'n'
-			&& !(state = init_gamestate(cmd)))
+			&& !(*state = init_gamestate(cmd)))
 		return (1);
-	else if (ft_strequ(*cmd, "board") && make_grid(cmd, state))
+	else if (ft_strequ(*cmd, "board") && make_grid(cmd, *state))
+		return (1);
+	else if (ft_strequ(*cmd, "pieces") && *(cmd[1]) == 'n')
+		(*state)->pieces = ft_atoi(cmd[2]);
+	else if (ft_strequ(*cmd, "piece") && add_piece(cmd, *state))
+		return (1);
+	else if (ft_strequ(*cmd, "go") && do_turn(*state))
+		return (1);
+	else if (ft_strequ(*cmd, "p") && player_action(cmd, *state))
+		return (1);
+	else if (ft_strequ(*cmd, "new") && on_piece_placed(cmd, *state))
 		return (1);
 	return (0);
+}
+
+static void		huston_we_have_a_problem(t_gamestate **state)
+{
+	t_gamestate *s;
+
+	s = *state;
+	dprintf(g_lfd, "Huuuuuuuh... houston?\nWE HAVE A PROBLEM!!!!!!!!\n");
+	if (s->pool)
+		delete_domino_list(&s->pool);
+	if (s->hand)
+		delete_domino_list(&s->pool);
+	if (s->placed)
+		delete_domino_list(&s->pool);
+	if (s->grid)
+		ft_strtabdel(&s->grid);
 }
 
 int				main(void)
@@ -69,15 +69,19 @@ int				main(void)
 	{
 		if (line && *line)
 		{
+			dprintf(g_lfd, "Input: %s\n", line);
 			cmd = ft_strsplit(line, SPLIT_CHAR);
-			if (proc_cmd(state, cmd))
+			if (proc_cmd(&state, cmd))
 			{
 				ft_strtabdel(&cmd);
+				if (state)
+					huston_we_have_a_problem(&state);
 				return (-1);
 			}
 			ft_strtabdel(&cmd);
 		}
-		free(line);
+		if (line)
+			ft_strdel(&line);
 	}
 	close(g_lfd);
 	return (0);

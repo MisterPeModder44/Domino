@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstrem.c                                        :+:      :+:    :+:   */
+/*   ft_lstextract.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yguaye <yguaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/16 14:37:16 by yguaye            #+#    #+#             */
-/*   Updated: 2017/12/17 14:49:30 by yguaye           ###   ########.fr       */
+/*   Created: 2017/12/17 13:45:51 by yguaye            #+#    #+#             */
+/*   Updated: 2017/12/17 14:40:22 by yguaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_base/base.h"
+#include <stdio.h>
 
-void		ft_lstrem(t_list **beg, t_list *target)
+t_list				*ft_lstextract(t_list **lst, void *target,
+		int (*cmp)(void *, void *))
 {
-	t_list	*lst;
-	t_list	*prev;
+	t_list		*tmp;
 
-	if (!beg || !*beg)
-		return ;
-	lst = *beg;
-	prev = NULL;
-	while (lst)
+	if (!lst || !*lst)
+		return (NULL);
+	tmp = *lst;
+	while (tmp)
 	{
-		if (lst == target)
+		if (!(*cmp)(target, tmp->content))
 		{
-			if (prev)
-				prev->next = lst->next;
-			else if (lst == *beg)
-				*beg = (*beg)->next;
-			lst->next = NULL;
-			return ;
+			printf("rem!");
+			ft_lstrem(lst, tmp);
+			tmp->next = NULL;
+			return (tmp);
 		}
-		else
-			prev = lst;
-		lst = lst->next;
+		tmp = tmp->next;
 	}
+	return (NULL);
 }

@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstrem.c                                        :+:      :+:    :+:   */
+/*   output_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yguaye <yguaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/16 14:37:16 by yguaye            #+#    #+#             */
-/*   Updated: 2017/12/17 14:49:30 by yguaye           ###   ########.fr       */
+/*   Created: 2017/12/17 15:37:48 by yguaye            #+#    #+#             */
+/*   Updated: 2017/12/17 17:34:01 by yguaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_base/base.h"
+#include "domino.h"
+#include "tmp.h"
 
-void		ft_lstrem(t_list **beg, t_list *target)
+int					cmd_sulk(void)
 {
-	t_list	*lst;
-	t_list	*prev;
+	char			*cmd;
 
-	if (!beg || !*beg)
-		return ;
-	lst = *beg;
-	prev = NULL;
-	while (lst)
-	{
-		if (lst == target)
-		{
-			if (prev)
-				prev->next = lst->next;
-			else if (lst == *beg)
-				*beg = (*beg)->next;
-			lst->next = NULL;
-			return ;
-		}
-		else
-			prev = lst;
-		lst = lst->next;
-	}
+	cmd = "sulk";
+	return (output_cmd(&cmd, 1));
+}
+
+int					cmd_draw(void)
+{
+	char			*cmd;
+
+	cmd = "draw";
+	return (output_cmd(&cmd, 1));
+}
+
+int					cmd_ko(void)
+{
+	char			*cmd;
+
+	cmd = "ko";
+	output_cmd(&cmd, 1);
+	return (1);
 }
